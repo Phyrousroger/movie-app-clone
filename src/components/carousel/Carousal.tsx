@@ -1,6 +1,14 @@
 import { RootState } from "@/store/store";
 import { Carousel } from "@mantine/carousel";
-import { Box, Card, Skeleton, Text, rem } from "@mantine/core";
+import {
+  Box,
+  Card,
+  Container,
+  Skeleton,
+  Text,
+  createStyles,
+  rem,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React from "react";
@@ -11,40 +19,42 @@ import {
 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { CircularProgressbar } from "react-circular-progressbar";
 import Generes from "../generes/Generes";
 import { useRouter } from "next/router";
 import Circular from "../circularprogress/Circular";
 
-interface carouselprops {
-  data: dataProps;
-  loading: any;
-  endpoint: string;
-}
+const useStyle = createStyles({
+  sketon: {
+    ":after": {
+      background: "#0a2955",
+    },
+  },
+});
 
-interface dataProps {
-  map(arg0: (item: dataProps) => React.JSX.Element): React.ReactNode;
-  name: string;
-  adult: boolean;
-  id: number;
-  genre_ids: [];
-  vote_average: number;
-  backdrop_path: string;
-  media_type: string;
-  title: string;
-  release_date: string;
-  popularity: number;
-  poster_path: string;
-}
-[];
-
-const Carousal: React.FC<carouselprops> = ({ data, loading, endpoint }) => {
+const Carousal: React.FC = ({ data, loading, endpoint, title }: any) => {
+  const { classes } = useStyle();
   const { url } = useSelector((state: RootState) => state.home);
   const isSmallerThanTable = useMediaQuery("(max-width: 768px)");
   const router = useRouter();
+  const slidecount = 5;
+  const slide = [];
+  for (let i: number = 0; i < slidecount; i++) {
+    slide.push(
+      <Carousel.Slide>
+        <Skeleton h={300} w={200} className={classes.sketon} />
+        <Skeleton mt={20} h={20} w={"90%"} className={classes.sketon} />
+        <Skeleton mt={20} h={20} w={"50%"} className={classes.sketon} />
+      </Carousel.Slide>
+    );
+  }
 
   return (
-    <Box py={30}>
+    <Container my={30} size={"lg"}>
+      {title && (
+        <Text size={20} fw={700} my={20}>
+          {title}
+        </Text>
+      )}
       {!loading ? (
         <Carousel
           nextControlIcon={
@@ -62,12 +72,12 @@ const Carousal: React.FC<carouselprops> = ({ data, loading, endpoint }) => {
           loop
           align="start"
         >
-          {data?.map((item: dataProps) => {
+          {data?.map((item: any) => {
             const postUrl = item.poster_path
               ? url.poster + item.poster_path
               : PosterFallback;
             const rating: number = parseFloat(item.vote_average.toFixed(1));
-            const handleSlideClick = (item: dataProps) => {
+            const handleSlideClick = (item: any) => {
               const { media_type, id } = item;
               const point = media_type || endpoint;
               const path = `/${point}/${id}`;
@@ -84,6 +94,7 @@ const Carousal: React.FC<carouselprops> = ({ data, loading, endpoint }) => {
                 <Card
                   p={0}
                   w={200}
+                  h={300}
                   style={{
                     cursor: "pointer",
                   }}
@@ -95,8 +106,7 @@ const Carousal: React.FC<carouselprops> = ({ data, loading, endpoint }) => {
                       borderRadius: "10px",
                     }}
                     onClick={() => handleSlideClick(item)}
-                    width={200}
-                    height={300}
+                    fill
                   />
                   <Box
                     style={{
@@ -147,24 +157,10 @@ const Carousal: React.FC<carouselprops> = ({ data, loading, endpoint }) => {
           align="start"
           draggable={false}
         >
-          <Carousel.Slide>
-            <Skeleton h={300} w={200} color="red" />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Skeleton h={300} w={200} />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Skeleton h={300} w={200} />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Skeleton h={300} w={200} />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Skeleton h={300} w={200} />
-          </Carousel.Slide>
+          {slide}
         </Carousel>
       )}
-    </Box>
+    </Container>
   );
 };
 

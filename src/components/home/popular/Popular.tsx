@@ -58,7 +58,7 @@ const Popular = () => {
     >
       <Container mt={50} size={"lg"}>
         <Flex justify={"space-between"}>
-          <Text fw={500} size={30}>
+          <Text fw={500} size={20}>
             What is popular
           </Text>
           <SegmentedControl
@@ -69,8 +69,8 @@ const Popular = () => {
             onChange={onTabChange}
           />
         </Flex>
-        <Carousel data={data?.results} loading={loading} endpoint={endpoint} />
       </Container>
+      <Carousel data={data?.results} loading={loading} endpoint={endpoint} />
     </Box>
   );
 };

@@ -11,42 +11,44 @@ import React from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { BsLinkedin } from "react-icons/bs";
 import { useMediaQuery } from "@mantine/hooks";
-const useStyle = createStyles({
-  nav: {
-    textDecoration: "none",
-    fontWeight: 500,
-    color: "white",
-    transition: "0.5s",
-    fontSize:"12px",
-    "&:hover": {
-      color: "purple",
-    },
-  },
-  logo: {
-    width: "50px",
-    height: "50px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "#04152d",
-    borderRadius: "50%",
-    transition: "all ease 0.3s",
-    "&:hover": {
-      boxShadow: "0 0 0.625em #da2f68",
-      color: "#da2f68",
-    },
-  },
-});
+
 
 const Footer = () => {
-  const { classes } = useStyle();
+  
   const isSmallerThanTable = useMediaQuery("(max-width:768px)");
-
+  const useStyle = createStyles({
+    nav: {
+      textDecoration: "none",
+      fontWeight: 500,
+      color: "white",
+      transition: "0.5s",
+      fontSize:isSmallerThanTable?"16px":"20px",
+      "&:hover": {
+        color: "purple",
+      },
+    },
+    logo: {
+      width: "50px",
+      height: "50px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      background: "#04152d",
+      borderRadius: "50%",
+      transition: "all ease 0.3s",
+      "&:hover": {
+        boxShadow: "0 0 0.625em #da2f68",
+        color: "#da2f68",
+      },
+    },
+  });
+  const { classes } = useStyle();
   return (
     <Center
       style={{
         // height: "50vh",
         background: "#020c1b",
+        position:"relative"
       }}
     >
       <Container
@@ -58,9 +60,7 @@ const Footer = () => {
       >
         <Flex direction={"column"} gap={30}>
           <Flex justify={"center"} gap={20} align={"center"} h={"100%"}>
-            <Link href={""} className={classes.nav} style={{
-              fontSize:isSmallerThanTable?"12px":"16px"
-            }}>
+            <Link href={""} className={classes.nav} >
               Terms Of Use
             </Link>
             <Link href={""} className={classes.nav}>

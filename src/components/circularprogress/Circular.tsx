@@ -8,7 +8,7 @@ const Circular = ({rating}:any) => {
       <CircularProgressbar
         value={rating}
         maxValue={10}
-        text={rating.toString()}
+        text={rating?.toString()}
         styles={{
           path: {
             stroke: rating < 5 ? "red" : rating < 7 ? "orange" : "green",
