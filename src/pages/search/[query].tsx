@@ -44,6 +44,7 @@ const Query = () => {
 
   useEffect(() => {
     fetchInitialData();
+    fetchNextPageData();
   }, []);
   return (
     <Layout>
