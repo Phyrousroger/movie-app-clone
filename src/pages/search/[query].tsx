@@ -45,7 +45,7 @@ const Query = () => {
   useEffect(() => {
     fetchInitialData();
     fetchNextPageData();
-  }, []);
+  }, [fetchInitialData, fetchNextPageData]);
   return (
     <Layout>
       <Container size="lg" mt={20}>
