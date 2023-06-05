@@ -69,7 +69,7 @@ const Toprated = () => {
             onChange={onTabChange}
           />
         </Flex>
-        <Carousel data={data?.results} loading={loading} endpoint={endpoint} />
+        <Carousel title="" data={data?.results} loading={loading} endpoint={endpoint} />
       </Container>
     </Box>
   );

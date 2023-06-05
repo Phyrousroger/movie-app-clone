@@ -69,7 +69,7 @@ const Trending = () => {
             onChange={onTabChange}
           />
         </Flex>
-        <Carousel data={data?.results} loading={loading} endpoint={""} />
+        <Carousel data={data?.results} loading={loading} endpoint={""} title={""} />
       </Container>
     </Box>
   );

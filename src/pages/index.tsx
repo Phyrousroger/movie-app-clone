@@ -23,7 +23,7 @@ const Index = () => {
   const generesCall = useCallback(async (): Promise<void> => {
     let promise: Promise<any>[] = [];
     let endpoint: string[] = ["tv", "movie"];
-    let allGeneres: { [key: string]: any } = {};
+    let allGeneres: any = {};
 
     endpoint.forEach((url: string) => {
       promise.push(fetchDataFromApi(`/genre/${url}/list`, {}));

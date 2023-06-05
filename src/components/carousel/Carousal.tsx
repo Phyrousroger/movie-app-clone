@@ -31,7 +31,13 @@ const useStyle = createStyles({
   },
 });
 
-const Carousal: React.FC = ({ data, loading, endpoint, title }: any) => {
+interface CarouselProps {
+  title: string;
+  data: any[];
+  loading: boolean;
+  endpoint: string;
+}
+const Carousal: React.FC<CarouselProps> = ({ data, loading, endpoint, title }) => {
   const { classes } = useStyle();
   const { url } = useSelector((state: RootState) => state.home);
   const isSmallerThanTable = useMediaQuery("(max-width: 768px)");

@@ -70,7 +70,7 @@ const Popular = () => {
           />
         </Flex>
       </Container>
-      <Carousel data={data?.results} loading={loading} endpoint={endpoint} />
+      <Carousel title="" data={data?.results} loading={loading} endpoint={endpoint} />
     </Box>
   );
 };

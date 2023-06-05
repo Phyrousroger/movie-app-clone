@@ -77,17 +77,20 @@ const Header = () => {
       sx={{
         transition: "all ease 0.5s",
         position: "relative",
-        zIndex: 1,
+        zIndex: 50,
         background: scroll ? "" : "rgba(0, 0, 0, 0.25)",
         transform: scroll ? "translateY(-60px)" : "",
       }}
     >
       <Container size={"lg"}>
         <Flex justify={"space-between"}>
-          <Image alt="" src={Logo} onClick={() => navigationHandler("")}
-          style={{
-            cursor:"pointer"
-          }}
+          <Image
+            alt=""
+            src={Logo}
+            onClick={() => navigationHandler("")}
+            style={{
+              cursor: "pointer",
+            }}
           />
           <Flex
             gap={"lg"}
@@ -203,6 +206,7 @@ const Header = () => {
                     top: 30,
                     zIndex: 100,
                     background: "rgba(0, 0, 0, 0.25)",
+                    borderRadius:30,
                     input: {
                       background: "#fff",
                       padding: "20px",
